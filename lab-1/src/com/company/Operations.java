@@ -1,40 +1,49 @@
 package com.company;
 import java.util.Scanner;
 import java.util.Random;
-import java.util.Arrays;
 
-class Operations {
-    static int count;
-    static Scanner in = new Scanner(System.in);
-    static double[] Mass;
+public class Operations {
+    int count;
+    Scanner in = new Scanner(System.in);
+    double[] Mass;
 
-    private static void Fill(int i){
+    private void Fill(int i){
         final Random random = new Random();
-        if(i == 1){
+        if(i == 0){
+            for(int a = 0; a < count; a++){
+                Mass[a] = random.nextInt(100);
+            }
+        }
+        else if(i == 1){
             for(int a = 0; a < count; a++){
                 System.out.print("Введите "+(a+1)+" элемент массива: ");
                 Mass[a] = in.nextDouble();
             }
         }
         else{
+            System.out.println("Некорректный ввод");
+        }
+    }
+    private void Out(int i){
+        if(i == 0){
+            System.out.print("Массив слева направо: ");
             for(int a = 0; a < count; a++){
-                Mass[a] = random.nextInt(100);
+                System.out.print(Mass[a] + " ");
             }
+            System.out.println(" ");
+        }
+        else if(i == 1){
+            System.out.println("Массив справа налево: ");
+            for(int a = count-1; a >= 0; a--){
+                System.out.print(Mass[a] + " ");
+            }
+            System.out.println(" ");
+        }
+        else{
+            System.out.println("Некорректный ввод");
         }
     }
-    private static void OutR(){
-        System.out.print("Массив слева направо: ");
-        System.out.println(Arrays.toString(Mass));
-        System.out.println(" ");
-    }
-    private static void OutL(){
-        System.out.println("Массив справа налево: ");
-        for(int a = count-1; a >= 0; a--){
-            System.out.print(Mass[a] + " ");
-        }
-        System.out.println(" ");
-    }
-    static double MiddleAr(){
+    public double MiddleAr(){
         double Sum = 0;
         int k = 0;
         for(int i = 0; i < count; i++){
@@ -45,7 +54,7 @@ class Operations {
         }
         return Sum / k;
     }
-    static double MiddleGeo(){
+    public double MiddleGeo(){
         double Sum = 1;
         int k = 0;
         for(int i = 0; i < count; i++){
@@ -56,7 +65,7 @@ class Operations {
         }
         return Math.pow(Sum, 1.0 / k );
     }
-    static void Sort(){
+    public void Sort(){
         int left = 1;
         int right = count - 1;
         while (left <= right)
@@ -64,18 +73,19 @@ class Operations {
             for (int i = right; i >= left; i--)
                 if (Mass[i - 1] < Mass[i]) Swap(i);
             left++;
+
             for (int i = left; i <= right; i++)
                 if (Mass[i - 1] < Mass[i]) Swap(i);
             right--;
         }
     }
-    private static void Swap(int i){
+    private void Swap(int i){
         double buff;
         buff = Mass[i];
         Mass[i] = Mass[i - 1];
         Mass[i - 1] = buff;
     }
-    static void menu(){
+    public void menu(){
         System.out.println("Введите кол-во элементов массива: ");
         count = in.nextInt();
         Mass = new double[count];
@@ -84,9 +94,7 @@ class Operations {
         Fill(random);
         System.out.println("Вывод массива:\n0-Слева направо\n1-Справа налево");
         int out_mass = in.nextInt();
-        if(out_mass==1)
-            OutL();
-        else
-            OutR();
+        Out(out_mass);
     }
 }
+
