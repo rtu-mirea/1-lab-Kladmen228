@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 class Task2 {
     private StringBuilder line;
-    private StringBuilder line2;
+    private StringBuffer line2;
     private ArrayList<Integer> Mass = new ArrayList<>();
     private ArrayList<Integer> Mass2 = new ArrayList<>();
     private String res = "";
@@ -15,7 +15,7 @@ class Task2 {
                 str += " ";
             line = new StringBuilder(str);
             res = str;
-            line2 = new StringBuilder(' ');
+            line2 = new StringBuffer(" ");
         }
         catch(Exception e) {
             System.out.println("Error");
