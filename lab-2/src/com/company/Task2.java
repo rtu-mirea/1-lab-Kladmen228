@@ -5,7 +5,9 @@ import java.util.regex.Pattern;
 
 class Task2 {
     private StringBuilder line;
+    private StringBuilder line1;
     private StringBuffer line2;
+    private StringBuffer line3;
     private ArrayList<Integer> Mass = new ArrayList<>();
     private ArrayList<Integer> Mass2 = new ArrayList<>();
     private String res = "";
@@ -14,8 +16,10 @@ class Task2 {
             if (str.charAt(str.length() - 1) != ' ')
                 str += " ";
             line = new StringBuilder(str);
+            line1 = new StringBuilder(" ");
             res = str;
             line2 = new StringBuffer(" ");
+            line3 = new StringBuffer(" ");
         }
         catch(Exception e) {
             System.out.println("Error");
@@ -37,6 +41,7 @@ class Task2 {
                 }
                 if (line.charAt(i) == '\t') {
                     count += 1;
+
                     if (count != 1) {
                         Mass.add(temp);
                         Mass2.add(temp2);
@@ -61,30 +66,42 @@ class Task2 {
                 line.append("\t").append(tmp);
             }
             System.out.println(line);
-            Update();
+            String str  = "";
+            for (int i = 0; i < line.length(); i++) {
+                if (line.charAt(i) == '\t') {
+                    str = String.valueOf(line2);
+                    Update(str);
+                    line2.delete(0,line2.length());
+                    line3.delete(0,line3.length());
+                }
+                line2.append(line.charAt(i));
+            }
             line.delete(0,line.length());
             line.append(res);
             line2.delete(0,line2.length());
             line2.append(" ");
+            System.out.print(line1+"\n");
         }
         catch(Exception ignored) {
 
         }
     }
-    private void Update(){
-        double t = 0,b = 0;
-        String str = String.valueOf(line);
+    private void Update(String str){
+        double t = 0;
+        line3.append(str);
         Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
         Matcher matcher = pattern.matcher(str);
+        String temp = "";
         while(matcher.find()) {
             t = Double.parseDouble(matcher.group());
-            Modify(t,b);
+            temp = String.valueOf(t);
+            line3.replace(matcher.start(), matcher.start()+temp.length(), Modify(t));
         }
-        System.out.print("\n");
+        line1.append(line3);
     }
-    private void Modify(double t, double b){
+    private String Modify(double b){
+        double t = Double.parseDouble(String.valueOf(b));
         int a = 0;
-        b = t;
         while(true){
             if(t>1){
                 t/=10;
@@ -93,6 +110,6 @@ class Task2 {
             else
                 break;
         }
-        System.out.print("Число "+ b +" в форме с плавающей точкой выглядит: "+ t +"*exp*10^"+a+"\n");
+        return  t +"*exp*10^"+a;
     }
 }
