@@ -8,9 +8,11 @@ class Task2 {
     private StringBuilder line1;
     private StringBuffer line2;
     private StringBuffer line3;
+    Boolean d = false;
     private ArrayList<Integer> Mass = new ArrayList<>();
     private ArrayList<Integer> Mass2 = new ArrayList<>();
     private String res = "";
+    private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
     void Input(String str){
         try {
             if (str.charAt(str.length() - 1) != ' ')
@@ -89,7 +91,6 @@ class Task2 {
     private void Update(String str){
         double t = 0;
         line3.append(str);
-        Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
         Matcher matcher = pattern.matcher(str);
         String temp = "";
         while(matcher.find()) {
@@ -97,7 +98,9 @@ class Task2 {
             temp = String.valueOf(t);
             line3.replace(matcher.start(), matcher.start()+temp.length(), Modify(t));
         }
-        line1.append(line3);
+        if(d)
+            line1.append(line3);
+        d = true;
     }
     private String Modify(double b){
         double t = Double.parseDouble(String.valueOf(b));
