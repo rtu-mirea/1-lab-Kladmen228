@@ -14,14 +14,14 @@ public class Main
             createDirectory("Первая\\Вторая\\Третья");
 
             print("\nПолучить параметры файлов методами класса File, в пунктах задания использовать объекты, созданные в задании 1");
-            Info();
+            info();
 
             print("\nМодификация файловой структуры приложения средствами класса File");
             createDirectory("one_more_folder");
             print(Arrays.toString(getFiles()));
             File[] files = getFolders();
             print(Arrays.toString(files));
-            getFoldersCount(files);
+            foldersCount(files);
             deleteFile(".", "MyFile1.txt");
             deleteFile("F:\\", "MyFile2.txt");
             deleteFile("C:\\Steam\\", "MyFile3.txt");
@@ -65,7 +65,7 @@ public class Main
     private static void deleteFile(String filepath, String name) {
         File file = new File(filepath, name);
         if (file.delete()) {
-            print(String.valueOf("Файл " + file.getName() + " удален"));
+            print("Файл " + file.getName() + " удален");
             return;
         }
         print("Ошибка удаления");
@@ -74,7 +74,7 @@ public class Main
     private static void deleteDirectory(String filepath) {
         File file = new File(filepath);
         if (file.delete()) {
-            print(String.valueOf("Папка " + file.getName() + " удалена"));
+            print("Папка " + file.getName() + " удалена");
             return;
         }
         print("Ошибка удаления");
@@ -90,7 +90,7 @@ public class Main
         return file.listFiles();
     }
 
-    private static void getFoldersCount(File[] files) {
+    private static void foldersCount(File[] files) {
         int count = 0;
         for (File file : files) {
             if (file.isDirectory()) {
@@ -100,14 +100,15 @@ public class Main
         print(String.valueOf(count));
     }
 
-    private static void Info() {
+    private static void info() {
         File file = new File("C:\\Steam\\", "MyFile4.txt");
         File file1 = new File("MyFile1.txt");
         String exist = "";
         if (file1.exists()) {
             exist = "Файл MyFile1.txt существует";
         }
-        print("Сузествует ли файл MyFile1.txt: " + exist + "\nИмя файла: " + file.getName() + "\nПуть к файлу: " + file.getAbsolutePath() + "\nВес: " + file.length() + " bytes\nТип файла: " + (file.isDirectory() ? "Папка" : "Файл"));
+        print("Существует ли файл MyFile1.txt: " + exist + "\nИмя файла: " + file.getName() + "\nПуть к файлу: " +
+                file.getAbsolutePath() + "\nВес: " + file.length() + " bytes\nТип файла: " + (file.isDirectory() ? "Папка" : "Файл"));
     }
 
     private static void print(String txt){
