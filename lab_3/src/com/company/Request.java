@@ -1,17 +1,31 @@
 package com.company;
 
-public class Request {
-    private String place;
+class Request {
+    private Professor requester;
     private String discipline;
     private int group;
     private int pairsInWeek;
 
-    public Request(Professor requester, String disc, int group, int hours){
-
+    Request(Professor requester, String disc, int group, int hours) {
+        this.requester = requester;
+        this.discipline = disc;
+        this.group = group;
+        this.pairsInWeek = hours;
     }
 
-    public String getPlace(){ return place; }
-    public String getDiscipline(){ return discipline; }
-    public int getGroup(){ return group; }
-    public int getPairs(){ return pairsInWeek; }
+    String getRequester() {
+        return this.requester.getName();
+    }
+
+    String getDiscipline() {
+        return this.discipline;
+    }
+
+    int getGroup() {
+        return this.group;
+    }
+
+    int getPairs() {
+        return this.pairsInWeek;
+    }
 }
