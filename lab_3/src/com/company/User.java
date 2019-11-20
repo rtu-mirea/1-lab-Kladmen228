@@ -1,19 +1,29 @@
 package com.company;
 
-public class User {
-    private String Name;
-    private String Login;
-    private String Password;
+class User {
+    private String name;
+    private String login;
+    private String password;
 
-    User(String Name, String Login, String Password){
-        this.Name = Name;
-        this.Login = Login;
-        this.Password = Password;
+    User(String name, String login, String password) {
+        this.name = name;
+        this.login = login;
+        this.password = password;
     }
 
-    public boolean enter(String Login, String Pass){
-        return true;
+    boolean enter(String login, String password) {
+        return this.login.equals(login) && this.password.equals(password);
+    }
+    
+    String getName() {
+        return this.name;
     }
 
-    public String getName(){ return Name; }
+    String getLogin() {
+        return this.login;
+    }
+
+    String getPassword() {
+        return this.password;
+    }
 }
