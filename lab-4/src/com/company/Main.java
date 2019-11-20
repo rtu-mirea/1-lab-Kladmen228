@@ -1,5 +1,6 @@
 package com.company;
 import java.io.File;
+import java.io.*;
 import java.util.Arrays;
 import java.io.IOException;
 
@@ -7,16 +8,16 @@ public class Main
 {
     public static void main(String[] args) {
         try{
-            print("\nИсследовать возможности класса File по созданию файлов (пустых) и папок программой. Применение конструктора и метода");
+            print("\n1.Исследовать возможности класса File по созданию файлов (пустых) и папок программой. Применение конструктора и метода");
             createFile(".", "MyFile1.txt");
             createFile("F:\\", "MyFile2.txt");
             createFile("C:\\Steam\\", "MyFile3.txt");
             createDirectory("Первая\\Вторая\\Третья");
 
-            print("\nПолучить параметры файлов методами класса File, в пунктах задания использовать объекты, созданные в задании 1");
+            print("\n2.Получить параметры файлов методами класса File, в пунктах задания использовать объекты, созданные в задании 1");
             info();
 
-            print("\nМодификация файловой структуры приложения средствами класса File");
+            print("\n3.Модификация файловой структуры приложения средствами класса File");
             createDirectory("one_more_folder");
             print(Arrays.toString(getFiles()));
             File[] files = getFolders();
@@ -29,6 +30,12 @@ public class Main
             deleteDirectory("Первая\\Вторая");
             deleteDirectory("Первая");
             deleteDirectory("one_more_folder");
+            print("\n1.Чтение из одного файла текстового файла и запись в другой");
+            fileReader();
+            print("\n2.Применение буферизированных потоков для чтения и записи текстовых файлов");
+            fileByffer();
+            print("\n3.Настройка кодировки символов для входного и выходного потоков");
+            
         }
         catch (Exception ignored){
 
@@ -109,6 +116,19 @@ public class Main
         }
         print("Существует ли файл MyFile1.txt: " + exist + "\nИмя файла: " + file.getName() + "\nПуть к файлу: " +
                 file.getAbsolutePath() + "\nВес: " + file.length() + " bytes\nТип файла: " + (file.isDirectory() ? "Папка" : "Файл"));
+    }
+
+    private static void fileReader() throws IOException {
+        InputStream inFile = new FileInputStream("T1.txt");
+        OutputStream outFile = new FileOutputStream("T2.txt");
+        int xx;
+        while((xx = inFile.read()) != -1){
+            outFile.write(xx);
+        }
+    }
+
+    private static void fileByffer(){
+        //BufferedReader ind = new BufferedReader();
     }
 
     private static void print(String txt){
