@@ -19,40 +19,40 @@ public class Timetable
             }
         }
         Scanner in = new Scanner(System.in);
-        int opt = -1;
-        while (opt != 0) {
-            opt = -1;
-            System.out.println("\nСистема автоматического составления расписания");
-            System.out.println("[0] - Выход из программы");
-            System.out.println("[1] - Вход");
-            System.out.println("[2] - Регистрация");
-            System.out.println("[3] - Меню администратора");
+        int menu = -1;
+        while (menu != 0) {
+            menu = -1;
+            println("\nСистема автоматического составления расписания");
+            println("[0] - Выход из программы");
+            println("[1] - Вход");
+            println("[2] - Регистрация");
+            println("[3] - Меню администратора");
             try {
-                opt = in.nextInt();
+                menu = in.nextInt();
             }
             catch (IllegalArgumentException e) {
-                System.out.println("Некорректный ввод");
+                println("Некорректный ввод");
                 continue;
             }
-            switch (opt) {
+            switch (menu) {
                 case 1: {
                     try{
-                        if (timetbl.logUser()) {
-                            while (opt != 0) {
-                                System.out.println("Здравствуйте, " + Timetable.currentUser.getName() + "!");
-                                System.out.println("[0] - Выход в главное меню");
-                                System.out.println("[1] - Подача заявки");
-                                System.out.println("[2] - Ваше расписание");
+                        if (timetbl.loginUser()) {
+                            while (menu != 0) {
+                                println("Здравствуйте, " + Timetable.currentUser.getName() + "!");
+                                println("[0] - Выход в главное меню");
+                                println("[1] - Подача заявки");
+                                println("[2] - Ваше расписание");
                                 Scanner in4 = new Scanner(System.in);
-                                opt = in4.nextInt();
-                                switch (opt) {
+                                menu = in4.nextInt();
+                                switch (menu) {
                                     case 1: {
                                         Scanner in5 = new Scanner(System.in);
-                                        System.out.print("Введите название дисциплины: ");
+                                        print("Введите название дисциплины: ");
                                         String disc = in5.nextLine();
-                                        System.out.print("Введите группу: ");
+                                        print("Введите группу: ");
                                         int group = in5.nextInt();
-                                        System.out.print("Введите количество пар: ");
+                                        print("Введите количество пар: ");
                                         int pairs = in5.nextInt();
                                         timetbl.addRequest(disc, group, pairs);
                                         continue;
@@ -64,83 +64,83 @@ public class Timetable
                                         continue;
                                     }
                                     default: {
-                                        System.out.println("Некорректный ввод");
+                                        println("Некорректный ввод");
                                     }
                                 }
                             }
-                            opt = -1;
+                            menu = -1;
                             continue;
                         }
                     }
                     catch (NullPointerException e){
-                        System.out.println("Данный пользователь не зарегистрирован");
+                        println("Данный пользователь не зарегистрирован");
                         continue;
                     }
                 }
                 case 2: {
                     Scanner in3 = new Scanner(System.in);
-                    System.out.print("Введите Ваше имя: ");
+                    print("Введите Ваше имя: ");
                     String name = in3.nextLine();
-                    System.out.print("Введите Ваш логин: ");
+                    print("Введите Ваш логин: ");
                     String login = in3.nextLine();
-                    System.out.print("Введите Ваш пароль: ");
+                    print("Введите Ваш пароль: ");
                     String pass = in3.nextLine();
                     timetbl.addUser(name, login, pass);
                     continue;
                 }
                 case 3: {
                     Scanner in2 = new Scanner(System.in);
-                    System.out.print("Введите логин: ");
+                    print("Введите логин: ");
                     String login = in2.next();
-                    System.out.print("Введите пароль: ");
+                    print("Введите пароль: ");
                     String pass = in2.next();
                     if (login.equals("admin") && pass.equals("admin")) {
-                        while (opt != 0) {
-                            System.out.println("Здравствуйте, администратор!");
-                            System.out.println("[0] - Выход в главное меню");
-                            System.out.println("[1] - Указать количество аудиторий");
-                            System.out.println("[2] - Указать количество групп");
-                            opt = in2.nextInt();
-                            switch (opt) {
+                        while (menu != 0) {
+                            println("Здравствуйте, администратор!");
+                            println("[0] - Выход в главное меню");
+                            println("[1] - Указать количество аудиторий");
+                            println("[2] - Указать количество групп");
+                            menu = in2.nextInt();
+                            switch (menu) {
                                 case 1: {
-                                    System.out.println("Введите количество аудиторий: ");
+                                    println("Введите количество аудиторий: ");
                                     int rooms = in2.nextInt();
                                     timetbl.setRooms(rooms);
                                     continue;
                                 }
                                 case 2: {
-                                    System.out.println("Введите количество групп: ");
+                                    println("Введите количество групп: ");
                                     int groups = in2.nextInt();
                                     timetbl.setGroups(groups);
                                     continue;
                                 }
-                                case 3: {
+                                case 0: {
                                     timetbl.processRequests();
-                                    System.out.println("Расписание составлено!");
+                                    println("Расписание составлено!");
                                 }
                             }
                         }
                     }
-                    opt = -1;
+                    menu = -1;
                     continue;
                 }
                 case 0: {
-                    System.out.print("Работа завершена");
+                    println("Работа завершена");
                     break;
                 }
                 default: {
-                    System.out.println("Некорректный ввод");
-                    opt = -1;
+                    println("Некорректный ввод");
+                    menu = -1;
                 }
             }
         }
     }
 
-    private boolean logUser() {
+    private boolean loginUser() {
         Scanner in = new Scanner(System.in);
-        System.out.print("Введите логин: ");
+        print("Введите логин: ");
         String login = in.nextLine();
-        System.out.print("Введите пароль: ");
+        print("Введите пароль: ");
         String password = in.nextLine();
         Timetable.currentUser = this.findUser(login, password);
         return Timetable.currentUser.enter(login, password);
@@ -148,7 +148,7 @@ public class Timetable
 
     private void addUser(String name, String login, String password) {
         if (this.findUser(login, password) != null) {
-            System.out.println("Пользователь уже зарегистрирован");
+            println("Пользователь уже зарегистрирован");
             return;
         }
         Timetable.currentUser = new Professor(name, login, password);
@@ -183,22 +183,22 @@ public class Timetable
         }
     }
 
+    private Professor findUser(String login, String password) {
+    for (Professor i : Timetable.users) {
+        if (i.getLogin().equals(login) && i.getPassword().equals(password)) {
+            return i;
+        }
+    }
+    return null;
+}
+
     private void printPairs(Professor user) {
-        System.out.println("Ваше расписание:");
+        println("Ваше расписание:");
         for (int i = 0; i < 6; ++i) {
             for (int j = 0; j < 6; ++j) {
                 Timetable.pairs[i][j].printPair(user.getName());
             }
         }
-    }
-
-    private Professor findUser(String login, String password) {
-        for (Professor i : Timetable.users) {
-            if (i.getLogin().equals(login) && i.getPassword().equals(password)) {
-                return i;
-            }
-        }
-        return null;
     }
 
     private void setRooms(int rooms) {
@@ -207,6 +207,14 @@ public class Timetable
 
     private void setGroups(int groups) {
         this.groups = groups;
+    }
+
+    private static void println(String text){
+        System.out.println(text);
+    }
+
+    private static void print(String text){
+        System.out.print(text);
     }
 
     static {
