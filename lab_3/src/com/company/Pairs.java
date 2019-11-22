@@ -6,14 +6,14 @@ class Pairs
     private String[] days;
     private ArrayList<Integer> room;
     private ArrayList<Integer> group;
-    private ArrayList<String> prof;
+    private ArrayList<String> professor;
     private ArrayList<String> pair;
 
     Pairs() {
         this.days = new String[] { "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота" };
         this.room = new ArrayList<Integer>();
         this.group = new ArrayList<Integer>();
-        this.prof = new ArrayList<String>();
+        this.professor = new ArrayList<String>();
         this.pair = new ArrayList<String>();
     }
 
@@ -26,7 +26,7 @@ class Pairs
     }
 
     void Prof_(String professor) {
-        this.prof.add(professor);
+        this.professor.add(professor);
     }
 
     boolean checkRoom(int room) {
@@ -38,7 +38,7 @@ class Pairs
     }
 
     boolean checkProfessor(String professor) {
-        return this.prof.contains(professor);
+        return this.professor.contains(professor);
     }
 
     int getRooms() {
