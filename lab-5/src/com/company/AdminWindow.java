@@ -42,7 +42,7 @@ class AdminWindow extends JFrame{
             AdminWindow.this.dispose();
         }
     }
-    static void processRequests() {
+    private static void processRequests() {
         for (Request r : Timetable.requests) {
             int number = r.getPairs();
             for (int i = 0; i < 6; ++i) {
