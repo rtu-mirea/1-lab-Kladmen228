@@ -1,10 +1,9 @@
 package com.company;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Window extends JFrame {
+class Window extends JFrame {
     private JLabel labelDict = new JLabel("Дисциплина: ");
     private JLabel labelGroup = new JLabel("Группа: ");
     private JLabel labelCount = new JLabel("Кол-во пар: ");
@@ -14,8 +13,7 @@ public class Window extends JFrame {
     private JButton Rec = new JButton("Сделать запрос");
     private JButton Pairs = new JButton("Узнать расписание");
     private JButton Menu = new JButton("Главное меню");
-    public static JList table;
-    public Window() {
+    Window() {
         super("Основное меню");
         Dimension dim = getToolkit().getScreenSize();
         this.setBounds(dim.width/2, dim.height/2, 500, 300);
@@ -40,7 +38,6 @@ public class Window extends JFrame {
 
         Menu.addActionListener(new ButtonMenuListener());
         container.add(Menu);
-        container.add(table);
     }
 
     class ButtonMenuListener implements ActionListener {
