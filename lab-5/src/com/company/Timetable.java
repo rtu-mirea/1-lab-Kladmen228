@@ -19,10 +19,4 @@ public class Timetable
             }
         }
     }
-
-    static {
-        Timetable.users = new ArrayList<>();
-        Timetable.requests = new ArrayList<>();
-        Timetable.pairs = new Pairs[6][6];
-    }
 }
