@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginWindow extends JFrame{
+class LoginWindow extends JFrame{
     private JLabel labelLogin = new JLabel("Логин: ");
     private JLabel labelPassword = new JLabel("Пароль: ");
     private JTextField inputLogin = new JTextField("");
@@ -12,7 +12,7 @@ public class LoginWindow extends JFrame{
     private JButton buttonEnter = new JButton("Войти");
     private JButton buttonRegistration = new JButton("Регистрация");
 
-    public LoginWindow() {
+    LoginWindow() {
         super("Меню авторизации");
         Dimension dim = getToolkit().getScreenSize();
         this.setBounds(dim.width/2, dim.height/2, 275, 125);
