@@ -19,7 +19,7 @@ class Serialization {
         } catch(IOException e) {}
     }
     public void outBook() throws IOException {
-        book Book = new book();
+        Scanner in = new Scanner(System.in);
         print("Введите автора: ");
         String author = in.nextLine();
         print("Введите название: ");
@@ -32,6 +32,7 @@ class Serialization {
         String count = in.nextLine();
         print("Введите цену: ");
         String cost = in.nextLine();
+        book Book = new book(author, name, id, pub, count, cost);
         Book.setAuthor(author);
         Book.setName(name);
         Book.setNumber(id);
@@ -42,17 +43,17 @@ class Serialization {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file_1));
         out.writeUTF(Book.getAuthor());
         out.writeUTF(Book.getName());
-        out.writeUTF(Book.getCNumber());
+        out.writeUTF(Book.getNumber());
         out.writeUTF(Book.getPublisher());
-        out.writeInt(Book.getCount());
-        out.writeInt(Book.getCost());
+        out.writeUTF(Book.getCount());
+        out.writeUTF(Book.getCost());
 
         out.close();
     }
     void inpBook () throws IOException {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(file_1));
 
-        book input = new book(in.readUTF(), in.readUTF(), in.readUTF(), in.readUTF(), in.readInt(), in.readInt());
+        book input = new book(in.readUTF(), in.readUTF(), in.readUTF(), in.readUTF(), in.readUTF(), in.readUTF());
 
         System.out.println("Информация о книге: "+input.getAuthor()+" "+input.getName()+" "+input.getNumber()
                 +" "+input.getPublisher()+" "+input.getCount()+" "+input.getCost());
@@ -72,15 +73,15 @@ class Serialization {
             print("Введите издание: ");
             String pub = in.nextLine();
             print("Введите кол-во страниц: ");
-            String count = in.nextLine();
+            String coun = in.nextLine();
             print("Введите цену: ");
             String cost = in.nextLine();
-            bk bk = new book();
+            book bk = new book(author, name, id, pub, coun, cost);
             bk.setAuthor(author);
             bk.setName(name);
             bk.setNumber(id);
             bk.setPublisher(pub);
-            bk.setCount(count);
+            bk.setCount(coun);
             bk.setCost(cost);
             Books.add(bk);
         }
@@ -90,10 +91,10 @@ class Serialization {
         for (book bk: Books) {
             out.writeUTF(bk.getAuthor());
             out.writeUTF(bk.getName());
-            out.writeUTF(bk.getCNumber());
+            out.writeUTF(bk.getNumber());
             out.writeUTF(bk.getPublisher());
-            out.writeInt(bk.getCount());
-            out.writeInt(bk.getCost());
+            out.writeUTF(bk.getCount());
+            out.writeUTF(bk.getCost());
         }
 
         out.close();
@@ -105,7 +106,7 @@ class Serialization {
         Books.clear();
         while(true) {
             try {
-                Books.add(new book(in.readUTF(), in.readUTF(), in.readUTF(), in.readUTF(), in.readInt(), in.readInt()));
+                Books.add(new book(in.readUTF(), in.readUTF(), in.readUTF(), in.readUTF(), in.readUTF(), in.readUTF()));
             } catch (EOFException e) {
                 in.close();
                 break;
@@ -120,7 +121,7 @@ class Serialization {
         }
     }
 
-    ArrayList<book> getCollection() {
+    ArrayList<book> getColl() {
         return Books;
     }
     private static void print(String txt){
