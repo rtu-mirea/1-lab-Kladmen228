@@ -2,8 +2,10 @@ package com.company;
 import java.io.File;
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main
 {
@@ -16,6 +18,8 @@ public class Main
             print("\n3.Модификация файловой структуры приложения средствами класса File");
             task1_3();
 
+            task2();
+
             print("\n1.Чтение из одного файла текстового файла и запись в другой");
             task3_1();
             print("\n2.Применение буферизированных потоков для чтения и записи текстовых файлов");
@@ -24,7 +28,7 @@ public class Main
             task3_3();
 
             print("Применение классов ObjectOutputStream и ObjectInputStream для сериализации и десериализации объектов ");
-            task4_1();
+            task4();
         }
         catch (Exception e){
             print(String.valueOf(e));
@@ -129,6 +133,61 @@ public class Main
         deleteDirectory("one_more_folder");
     }
 
+    private static void task2() throws IOException {
+        Scanner in = new Scanner(System.in);
+        String StringBuf = "";
+        print("Введите название файла: ");
+        StringBuf = in.nextLine();
+        StringBuf.trim();
+
+        print("Введите кол-во книг: ");
+        int IntBuf = in.nextInt();
+
+        FileManager F = new FileManager(StringBuf);
+
+        if(F.exist()){
+            print("Файл существует");
+        }else {
+            print("Файл не существует и будет создан.");
+            try {
+                F.create();
+            } catch (Exception ignored) {}
+        }
+        for(int i = 0; i < IntBuf; ++i){
+            print("Вы вводите книгу №" + (i + 1));
+            print("Введите автора: ");
+            String author = in.nextLine();
+            print("Введите название: ");
+            String name = in.nextLine();
+            print("Введите id: ");
+            String id = in.nextLine();
+            print("Введите издание: ");
+            String pub = in.nextLine();
+            print("Введите кол-во страниц: ");
+            String count = in.nextLine();
+            print("Введите цену: ");
+            String cost = in.nextLine();
+
+            book Book = new book(author,name,id,pub,count,cost);
+            try {
+                F.write(Book);
+                ArrayList<book> Books = F.GetBooks();
+                print("Введите автора для поиска книги: ");
+                author = in.nextLine();
+                print("Введите название для поиска книги: ");
+                name = in.nextLine();
+                print(F.findId(author, name));
+                print("Введите издание для изменения: ");
+                pub = in.nextLine();
+                F.changePublisher(pub);
+                print("Введите автора для поиска всех книг: ");
+                author = in.nextLine();
+                F.oneAuthor(author);
+            }
+            catch (IOException ignored){}
+        }
+    }
+
     private static void task3_1(){
         try {
             Reader reader = new InputStreamReader(new FileInputStream("T1.txt"));
@@ -186,8 +245,27 @@ public class Main
         }
     }
 
-    private static void task4_1(){
-
+    private static void task4(){
+        try {
+            String file1path = "C:\\Users\\dakfa\\Desktop\\st\\Java\\lab4_2\\Serialization.bin";
+            File fileS = new File(file1path);
+            fileS.createNewFile();
+            ClassTextFile input = new ClassTextFile("Input.txt");
+            book fst = input.setBook();
+            System.out.println("Информация о книге: "+fst.getAuthor()+" "+fst.getName()+" "+fst.getNumber()
+                    +" "+fst.getPublisher()+" "+fst.getCount()+" "+fst.getCost());
+            Serialization scnd = new Serialization("C:\\Users\\dakfa\\Desktop\\st\\Java\\lab4_2\\Serialization.bin");
+            scnd.outBook();
+            scnd.inpBook();
+            Serialization trd = new Serialization("C:\\Users\\dakfa\\Desktop\\st\\Java\\lab4_2\\Serialization.bin");
+            trd.addToColl();
+            print("Коллекция после добавления объектов:");
+            trd.printColl();
+            print("Коллекция после записи/чтения:");
+            trd.outColl();
+            trd.inpColl();
+            trd.printColl();
+        } catch (IOException ignored) {}
     }
 
     private static void print(String txt){
