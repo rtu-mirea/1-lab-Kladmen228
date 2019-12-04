@@ -8,7 +8,6 @@ class Pairs
     private ArrayList<Integer> group;
     private ArrayList<String> professor;
     private ArrayList<String> pair;
-
     Pairs() {
         this.days = new String[] { "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота" };
         this.room = new ArrayList<Integer>();
