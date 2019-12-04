@@ -9,12 +9,12 @@ public class book {
     private String Cost;
 
     public book(String author,  String name, String number, String publisher, String count, String cost){
-        this.Author = author;
-        this.Name = name;
-        this.Number = number;
-        this.Publisher = publisher;
-        this.Count = count;
-        this.Cost = cost;
+        setAuthor(author);
+        setName(name);
+        setNumber(number);
+        setPublisher(publisher);
+        setCount(count);
+        setCost(cost);
     }
 
     public String getAuthor() {  return Author; }
@@ -23,6 +23,13 @@ public class book {
     public String getPublisher() {    return Publisher; }
     public String getCount() {  return Count; }
     public String getCost() {   return Cost; }
+
+    public void setAuthor(String author) { this.Author = author; }
+    public void setName(String name) {   this.Name = name; }
+    public void setNumber(String number) {   this.Number = number; }
+    public void setPublisher(String publisher) {    this.Publisher = publisher; }
+    public void setCount(String count) {  this.Count = count; }
+    public void setCost(String cost) {   this.Cost = cost; }
 
     private String getNumber(String name, String author){
         return Number;
