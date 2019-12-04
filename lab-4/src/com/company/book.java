@@ -5,8 +5,24 @@ public class book {
     private String Name;
     private String Number;
     private String Publisher;
-    private int Count;
-    private int Cost;
+    private String Count;
+    private String Cost;
+
+    public book(String author,  String name, String number, String publisher, String count, String cost){
+        this.Author = author;
+        this.Name = name;
+        this.Number = number;
+        this.Publisher = publisher;
+        this.Count = count;
+        this.Cost = cost;
+    }
+
+    public String getAuthor() {  return Author; }
+    public String getName() {   return Name; }
+    public String getNumber() {   return Number; }
+    public String getPublisher() {    return Publisher; }
+    public String getCount() {  return Count; }
+    public String getCost() {   return Cost; }
 
     private String getNumber(String name, String author){
         return Number;
@@ -26,8 +42,9 @@ public class book {
     private void changePublisher(String pub1, String pub2){
         print("");
     }
-    
+
     private void print(String txt){
         System.out.println(txt);
     }
 }
+
